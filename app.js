@@ -1,7 +1,7 @@
 // ── CONFIG ──────────────────────────────────────────────────────────
 // IMPORTANT: Replace this with Becky's own Google OAuth Web Client ID after
 // creating it in Google Cloud and authorizing her GitHub Pages origin.
-const CLIENT_ID = 'REPLACE_WITH_RG_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com';
+const CLIENT_ID = '255752713712-k3llal848drdndheiod5hff4tb4m3hn5.apps.googleusercontent.com';
 const APP_VERSION = '2026.08.29.1';
 
 // RG canonical Sheets
