@@ -212,7 +212,7 @@
   function visibleTask(task) {
     if (task.recurrence) {
       // Keep the existing recurrence and weekly-quota rules, but hide today's completion.
-      if (task.done) return showCompleted;
+      if (task.done) return false; // Retired recurring definitions remain suppressed.
       return recurringVisible(task) && (showCompleted || !recurringCompletedToday(task));
     }
     return showCompleted || !task.done;
