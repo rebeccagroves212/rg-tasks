@@ -30,6 +30,7 @@
   let domainFirst = 'Work';
   let sortMode = 'priority';
   let boardMode = 'tracked';
+  let showCompleted = false;
   let tokenClient = null;
   let accessToken = null;
   let tasks = [];
@@ -70,7 +71,7 @@
       <div id="version-tag">App code: ${escapeHtml(APP_VERSION)}</div>
       <div id="status">Loading…</div><button id="connect-btn">Connect to Google</button>
       <div class="tab-bar"><button id="tab-tasks" class="active">Tasks</button><button id="tab-board">Board</button></div>
-      <div id="sort-controls"><button id="sort-domain">Work first</button><button id="sort-category">By Category</button><button id="sort-priority" class="active">By Priority</button></div>
+      <div id="sort-controls"><button id="sort-domain">Work first</button><button id="sort-category">By Category</button><button id="sort-priority" class="active">By Priority</button><button id="show-completed" type="button" aria-pressed="false">Show completed</button></div>
       <div id="board-controls" style="display:none"><button id="board-tracked" class="active">Tracked Only</button><button id="board-all">All Categories</button></div>
       <div id="tasks"></div>
       <div id="task-modal"><div class="modal-box"><div class="modal-title" id="task-modal-title"></div><div class="detail-meta" id="task-modal-meta"></div><div class="detail-section"><div class="detail-label">Notes</div><textarea id="task-modal-notes" placeholder="Add task details…"></textarea></div><div class="detail-actions"><button id="task-notes-save" class="primary">Save notes</button><button id="task-modal-close" class="secondary">Close</button></div></div></div>`;
@@ -208,7 +209,16 @@
   function openTaskModal(task){detailTask=task;document.getElementById('task-modal-title').textContent=task.task;document.getElementById('task-modal-meta').textContent=[labelTag(task.tag),task.priority,task.due?`Due ${task.due}`:'',task.recurrence?`Recurring ${task.recurrence}`:''].filter(Boolean).join(' · ');document.getElementById('task-modal-notes').value=task.notes||'';document.getElementById('task-modal').style.display='flex';}
   function closeTaskModal(){document.getElementById('task-modal').style.display='none';detailTask=null;}
 
-  function render(){if(activeTab==='board'){renderBoard();return;}const base=tasks.length?tasks:loadCache();const list=base.filter(recurringVisible);const container=document.getElementById('tasks');container.innerHTML='';const todayItems=list.filter(isToday),workItems=list.filter(t=>t.tag.trim().startsWith('W')&&!isToday(t)),personalItems=list.filter(t=>t.tag.trim().startsWith('P')&&!isToday(t)),otherItems=list.filter(t=>!t.tag.trim().startsWith('W')&&!t.tag.trim().startsWith('P')&&!isToday(t));
+  function visibleTask(task) {
+    if (task.recurrence) {
+      // Keep the existing recurrence and weekly-quota rules, but hide today's completion.
+      if (task.done) return showCompleted;
+      return recurringVisible(task) && (showCompleted || !recurringCompletedToday(task));
+    }
+    return showCompleted || !task.done;
+  }
+
+  function render(){if(activeTab==='board'){renderBoard();return;}const base=tasks.length?tasks:loadCache();const list=base.filter(visibleTask);const container=document.getElementById('tasks');container.innerHTML='';const todayItems=list.filter(isToday),workItems=list.filter(t=>t.tag.trim().startsWith('W')&&!isToday(t)),personalItems=list.filter(t=>t.tag.trim().startsWith('P')&&!isToday(t)),otherItems=list.filter(t=>!t.tag.trim().startsWith('W')&&!t.tag.trim().startsWith('P')&&!isToday(t));
     function taskRow(t){const recurringDone=t.recurrence&&recurringCompletedToday(t);const checked=t.recurrence?recurringDone:t.done;const progress=t.recurrence?recurringProgress(t):'';const row=document.createElement('div');row.className='item'+(checked?' done':'');row.innerHTML=`<input type="checkbox" ${checked?'checked':''}/><div class="content"><div class="label">${escapeHtml(t.task)}${t.notes?' <span class="note-flag" title="Has notes">📝</span>':''}</div><div class="proj">${escapeHtml(labelTag(t.tag))} · <span class="priority-tag">${escapeHtml(t.priority||'Medium')}</span>${progress?` · <span class="recurring-progress">${escapeHtml(progress)}</span>`:''}</div></div><div class="due-col${(!t.recurrence&&isOverdue(t))?' overdue':''}">${escapeHtml(t.recurrence?'':(t.due||''))}</div><button type="button" class="today-btn ${isToday(t)?'active':''}" aria-label="Toggle Today"></button>`;
       row.querySelector('input').addEventListener('click',e=>e.stopPropagation());row.querySelector('input').addEventListener('change',e=>toggleDone(t,e.target.checked));row.querySelector('.today-btn').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();toggleTodayShared(t,!isToday(t));});row.querySelector('.content').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openTaskModal(t);});row.addEventListener('click',()=>openTaskModal(t));return row;}
     const subhead=t=>{const h=document.createElement('div');h.className='subhead';h.textContent=t;return h;};const domainHead=t=>{const h=document.createElement('div');h.className='group-head';h.textContent=t;return h;};
@@ -216,7 +226,7 @@
     function renderGrouped(items){if(sortMode==='category'){const groups={};items.forEach(t=>(groups[getCategoryLabel(t.tag)]??=[]).push(t));Object.keys(groups).sort().forEach(cat=>{container.appendChild(subhead(cat));byPriority(groups[cat]).forEach(t=>container.appendChild(taskRow(t)));});}else{['High','Medium','Low'].forEach(tier=>{const x=items.filter(t=>(t.priority||'Medium')===tier);if(x.length){container.appendChild(subhead(tier));byDate(x).forEach(t=>container.appendChild(taskRow(t)));}});}}
     function section(title,items){if(!items.length)return;container.appendChild(domainHead(title));renderGrouped(items);}
     function todaySection(items){if(!items.length)return;container.appendChild(domainHead('Today'));const work=items.filter(t=>t.tag.trim().startsWith('W')),personal=items.filter(t=>t.tag.trim().startsWith('P')),other=items.filter(t=>!t.tag.trim().startsWith('W')&&!t.tag.trim().startsWith('P'));const ordered=domainFirst==='Personal'?[['Personal',personal],['Work',work]]:[['Work',work],['Personal',personal]];ordered.forEach(([label,group])=>{if(!group.length)return;container.appendChild(subhead(label));renderGrouped(group);});if(other.length){container.appendChild(subhead('Other'));renderGrouped(other);}}
-    todaySection(todayItems);if(domainFirst==='Personal'){section('Personal',personalItems);section('Work',workItems);}else{section('Work',workItems);section('Personal',personalItems);}section('Other',otherItems);if(!list.length)container.innerHTML='<p class="empty">No tasks loaded yet. Connect to sync.</p>';
+    todaySection(todayItems);if(domainFirst==='Personal'){section('Personal',personalItems);section('Work',workItems);}else{section('Work',workItems);section('Personal',personalItems);}section('Other',otherItems);if(!list.length)container.innerHTML=!base.length?'<p class="empty">No tasks loaded yet. Connect to sync.</p>':showCompleted?'<p class="empty">No tasks to display.</p>':'<p class="empty">No active tasks. Select Show completed to review finished work.</p>';
   }
 
   function yearProgressPct(dateStr){if(!dateStr)return null;const d=new Date(dateStr+(dateStr.length===10?'T12:00:00':''));if(Number.isNaN(d.getTime()))return null;const start=new Date(d.getFullYear(),0,1),end=new Date(d.getFullYear(),11,31);return Math.round(((d-start)/(end-start))*100);}
@@ -225,7 +235,15 @@
 
   function setTab(tab){activeTab=tab;document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');document.getElementById('tab-board').classList.toggle('active',tab==='board');document.getElementById('sort-controls').style.display=tab==='tasks'?'flex':'none';document.getElementById('board-controls').style.display=tab==='board'?'flex':'none';render();}
 
-  function bindEvents(){document.getElementById('connect-btn').addEventListener('click',connect);document.getElementById('tab-tasks').addEventListener('click',()=>setTab('tasks'));document.getElementById('tab-board').addEventListener('click',()=>setTab('board'));document.getElementById('sort-domain').addEventListener('click',()=>{domainFirst=domainFirst==='Work'?'Personal':'Work';document.getElementById('sort-domain').textContent=domainFirst+' first';render();});['category','priority'].forEach(mode=>document.getElementById('sort-'+mode).addEventListener('click',()=>{sortMode=mode;['category','priority'].forEach(m=>document.getElementById('sort-'+m).classList.toggle('active',m===mode));render();}));['tracked','all'].forEach(mode=>document.getElementById('board-'+mode).addEventListener('click',()=>{boardMode=mode;['tracked','all'].forEach(m=>document.getElementById('board-'+m).classList.toggle('active',m===mode));render();}));document.getElementById('task-modal-close').addEventListener('click',closeTaskModal);document.getElementById('task-modal').addEventListener('click',e=>{if(e.target.id==='task-modal')closeTaskModal();});document.getElementById('task-notes-save').addEventListener('click',async()=>{const task=detailTask;if(!task)return;const text=document.getElementById('task-modal-notes').value;const ok=await saveTaskNotes(task,text);if(ok&&detailTask===task)document.getElementById('task-modal-notes').value=task.notes||'';});}
+  function bindEvents(){document.getElementById('connect-btn').addEventListener('click',connect);document.getElementById('tab-tasks').addEventListener('click',()=>setTab('tasks'));document.getElementById('tab-board').addEventListener('click',()=>setTab('board'));document.getElementById('sort-domain').addEventListener('click',()=>{domainFirst=domainFirst==='Work'?'Personal':'Work';document.getElementById('sort-domain').textContent=domainFirst+' first';render();});['category','priority'].forEach(mode=>document.getElementById('sort-'+mode).addEventListener('click',()=>{sortMode=mode;['category','priority'].forEach(m=>document.getElementById('sort-'+m).classList.toggle('active',m===mode));render();}));['tracked','all'].forEach(mode=>document.getElementById('board-'+mode).addEventListener('click',()=>{boardMode=mode;['tracked','all'].forEach(m=>document.getElementById('board-'+m).classList.toggle('active',m===mode));render();}));document.getElementById('show-completed').addEventListener('click',()=>{
+      showCompleted=!showCompleted;
+      const btn=document.getElementById('show-completed');
+      btn.classList.toggle('active',showCompleted);
+      btn.setAttribute('aria-pressed',String(showCompleted));
+      btn.textContent=showCompleted?'Hide completed':'Show completed';
+      render();
+    });
+    document.getElementById('task-modal-close').addEventListener('click',closeTaskModal);document.getElementById('task-modal').addEventListener('click',e=>{if(e.target.id==='task-modal')closeTaskModal();});document.getElementById('task-notes-save').addEventListener('click',async()=>{const task=detailTask;if(!task)return;const text=document.getElementById('task-modal-notes').value;const ok=await saveTaskNotes(task,text);if(ok&&detailTask===task)document.getElementById('task-modal-notes').value=task.notes||'';});}
 
   function boot(){injectShell();if(new Date().getDay()===0||new Date().getDay()===6){domainFirst='Personal';document.getElementById('sort-domain').textContent='Personal first';}tasks=loadCache();const c=loadTaxonomyCache();taxonomy=c.labels||{};taxonomyParent=c.parents||{};board=JSON.parse(localStorage.getItem(BOARD_CACHE_KEY)||'[]');render();bindEvents();if(typeof google==='undefined'||!google.accounts?.oauth2)setStatus('Google sign-in library did not load. Refresh when online.');else initAuth();}
 
