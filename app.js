@@ -62,8 +62,8 @@
         .group-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;margin:1.2rem 0 .4rem;padding-bottom:4px;border-bottom:1.5px solid #d0cfc8}.subhead{font-size:12px;font-weight:600;color:#666;margin:.6rem 0 .15rem 4px}
         .item{display:flex;align-items:flex-start;gap:10px;padding:10px 4px;border-bottom:.5px solid #e8e6df;cursor:pointer}.item input[type=checkbox]{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--app-accent)}.content{flex:1;min-width:0}.label{font-size:14px;font-weight:500}.item.done .label{color:#aaa;text-decoration:line-through}.proj{font-size:11.5px;color:#999;margin-top:2px}.priority-tag{font-weight:600}.due-col{margin-left:auto;font-size:11.5px;color:#999;white-space:nowrap;padding-top:2px;flex-shrink:0}.due-col.overdue{color:#d32f2f;font-weight:700}.today-btn{width:16px;height:16px;border-radius:50%;border:1.5px solid #ccc;margin-top:2px;flex-shrink:0;cursor:pointer;background:transparent}.today-btn.active{background:var(--app-accent);border-color:var(--app-accent)}.note-flag{font-size:12px;margin-left:2px}.empty{font-size:13px;color:#999;padding:2rem 0;text-align:center}
         .board-card{border:1px solid #e0dfd8;border-radius:8px;padding:10px 12px;margin-bottom:8px;border-left:3px solid #ccc}.board-card.priority-high{border-left-color:#c0392b}.board-card.priority-medium{border-left-color:#e67e22}.board-card.priority-low{border-left-color:#ccc}.board-card.untracked{opacity:.6;border-left-color:#ddd}.board-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}.board-code{font-size:10.5px;color:#999}.board-stage{font-size:9px;font-weight:700;text-transform:uppercase;color:#888;background:#f0f0ee;padding:2px 6px;border-radius:3px}.board-name{font-size:14px;font-weight:600;margin-bottom:3px}.board-next{font-size:12.5px;color:#444;margin-bottom:4px}.board-track{position:relative;height:4px;background:#eee;border-radius:2px;margin:6px 0 2px}.board-marker{position:absolute;top:-3px;width:10px;height:10px;border-radius:50%;background:var(--app-accent);transform:translateX(-50%)}.board-date{font-size:10.5px;color:#999;margin-bottom:4px}.board-notes{font-size:11.5px;color:#888;line-height:1.4}
-        #task-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);align-items:flex-end;justify-content:center;z-index:50}.modal-box{background:#fff;width:100%;max-width:640px;border-radius:14px 14px 0 0;padding:1rem 1rem 1.25rem;max-height:82%;overflow-y:auto}.modal-title{font-size:16px;font-weight:650;margin-bottom:8px}.detail-meta{font-size:12px;color:#777;margin-bottom:10px}.detail-section{margin-top:10px}.detail-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#999;font-weight:700;margin-bottom:4px}.detail-text{font-size:13.5px;line-height:1.45;white-space:pre-wrap;background:#f5f4f0;border-radius:8px;padding:9px 10px}.detail-empty{color:#aaa;font-style:italic}.detail-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;flex-wrap:wrap}.detail-actions button{font-size:14px;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-family:inherit}.secondary{background:#f0f0ee;color:#555}.primary{background:var(--app-accent);color:#fff;font-weight:500}#task-modal-notes{width:100%;font-family:inherit;font-size:14px;border:1px solid #d0cfc8;border-radius:8px;padding:10px;resize:vertical;min-height:110px;background:#fff;color:inherit}
-        @media(prefers-color-scheme:dark){body{background:#1c1c1a;color:#e8e6df}.group-head{color:#888;border-bottom-color:#333}.item{border-bottom-color:#2e2e2b}.label{color:#e8e6df}.item.done .label{color:#666}.proj,.subhead{color:#888}.tab-bar button,#sort-controls button,#board-controls button{background:#252523;border-color:#333;color:#999}.tab-bar button.active{background:#e8e6df;color:#1a1a18;border-color:#e8e6df}.board-card{border-color:#333}.board-stage{background:#252523;color:#999}.board-name{color:#e8e6df}.board-next{color:#ccc}.modal-box{background:#1c1c1a}.detail-text,#task-modal-notes{background:#252523;color:#e8e6df;border-color:#333}.secondary{background:#252523;color:#aaa}}
+        #task-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);align-items:flex-end;justify-content:center;z-index:50}.modal-box{background:#fff;width:100%;max-width:640px;border-radius:14px 14px 0 0;padding:1rem 1rem 1.25rem;max-height:82%;overflow-y:auto}.modal-title{font-size:16px;font-weight:650;margin-bottom:8px}.detail-meta{font-size:12px;color:#777;margin-bottom:10px}.detail-section{margin-top:10px}.detail-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#999;font-weight:700;margin-bottom:4px}.detail-text{font-size:13.5px;line-height:1.45;white-space:pre-wrap;background:#f5f4f0;border-radius:8px;padding:9px 10px}.detail-empty{color:#aaa;font-style:italic}.detail-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;flex-wrap:wrap}.detail-actions button{font-size:14px;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-family:inherit}.secondary{background:#f0f0ee;color:#555}.primary{background:var(--app-accent);color:#fff;font-weight:500}#task-modal-notes{width:100%;font-family:inherit;font-size:14px;border:1px solid #d0cfc8;border-radius:8px;padding:10px;resize:vertical;min-height:110px;background:#fff;color:inherit}#task-modal-name,#task-modal-priority{width:100%;font-family:inherit;font-size:14px;border:1px solid #d0cfc8;border-radius:8px;padding:10px;background:#fff;color:inherit}#task-modal-name:focus-visible,#task-modal-priority:focus-visible{outline:2px solid var(--app-accent);outline-offset:2px}
+        @media(prefers-color-scheme:dark){body{background:#1c1c1a;color:#e8e6df}.group-head{color:#888;border-bottom-color:#333}.item{border-bottom-color:#2e2e2b}.label{color:#e8e6df}.item.done .label{color:#666}.proj,.subhead{color:#888}.tab-bar button,#sort-controls button,#board-controls button{background:#252523;border-color:#333;color:#999}.tab-bar button.active{background:#e8e6df;color:#1a1a18;border-color:#e8e6df}.board-card{border-color:#333}.board-stage{background:#252523;color:#999}.board-name{color:#e8e6df}.board-next{color:#ccc}.modal-box{background:#1c1c1a}.detail-text,#task-modal-notes,#task-modal-name,#task-modal-priority{background:#252523;color:#e8e6df;border-color:#333}.secondary{background:#252523;color:#aaa}}
       </style>`);
 
     document.body.innerHTML = `
@@ -74,7 +74,15 @@
       <div id="sort-controls"><button id="sort-domain">Work first</button><button id="sort-category">By Category</button><button id="sort-priority" class="active">By Priority</button><button id="show-completed" type="button" aria-pressed="false">Show completed</button></div>
       <div id="board-controls" style="display:none"><button id="board-tracked" class="active">Tracked Only</button><button id="board-all">All Categories</button></div>
       <div id="tasks"></div>
-      <div id="task-modal"><div class="modal-box"><div class="modal-title" id="task-modal-title"></div><div class="detail-meta" id="task-modal-meta"></div><div class="detail-section"><div class="detail-label">Notes</div><textarea id="task-modal-notes" placeholder="Add task details…"></textarea></div><div class="detail-actions"><button id="task-notes-save" class="primary">Save notes</button><button id="task-modal-close" class="secondary">Close</button></div></div></div>`;
+      <div id="task-modal"><div class="modal-box">
+        <div class="modal-title" id="task-modal-title"></div>
+        <div class="detail-meta" id="task-modal-meta"></div>
+        <div class="detail-section"><label class="detail-label" for="task-modal-name">Task title</label><input type="text" id="task-modal-name" maxlength="500" autocomplete="off"></div>
+        <div class="detail-section"><label class="detail-label" for="task-modal-priority">Priority</label><select id="task-modal-priority"><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select></div>
+        <div class="detail-actions"><button id="task-details-save" class="primary">Save task + priority</button></div>
+        <div class="detail-section"><label class="detail-label" for="task-modal-notes">Notes</label><textarea id="task-modal-notes" placeholder="Add task details…"></textarea></div>
+        <div class="detail-actions"><button id="task-notes-save" class="secondary">Save notes</button><button id="task-modal-close" class="secondary">Close</button></div>
+      </div></div>`;
   }
 
   function saveCache(v){ localStorage.setItem(CACHE_KEY, JSON.stringify(v)); }
@@ -170,7 +178,7 @@
     try{const res=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${TASK_RANGE}`,{headers:{Authorization:`Bearer ${accessToken}`}});if(!res.ok)throw new Error('HTTP '+res.status);const data=await res.json();tasks=(data.values||[]).slice(1).map((r,i)=>({row:i+2,id:r[0]||'',task:r[1]||'',tag:r[2]||'',due:r[3]||'',priority:r[4]||'Medium',notes:r[5]||'',done:(r[6]||'').toString().toUpperCase()==='TRUE',todayFlag:(r[7]||'').toString().trim().toUpperCase(),note:r[8]||'',recurrence:r[9]||''})).filter(t=>t.id);saveCache(tasks);setStatus('Synced '+new Date().toLocaleTimeString());render();flushQueue();}catch(e){setStatus('Sync failed, showing cached data: '+e.message);tasks=loadCache();render();}
   }
 
-  async function writeColumn(task,column,field,value){task[field]=value;saveCache(tasks);render();const cellValue=typeof value==='boolean'?(value?'TRUE':'FALSE'):value;if(accessToken&&navigator.onLine){try{const res=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${column}${task.row}?valueInputOption=RAW`,{method:'PUT',headers:{Authorization:`Bearer ${accessToken}`,'Content-Type':'application/json'},body:JSON.stringify({values:[[cellValue]]})});if(!res.ok)throw new Error('HTTP '+res.status);setStatus('Saved.');}catch(e){queueWrite(task.row,column,cellValue);setStatus('Offline or write failed — queued for later sync.');}}else{queueWrite(task.row,column,cellValue);setStatus('Offline — change queued, will sync when connected.');}}
+  async function writeColumn(task,column,field,value){task[field]=value;saveCache(tasks);render();const cellValue=typeof value==='boolean'?(value?'TRUE':'FALSE'):value;if(accessToken&&navigator.onLine){try{const res=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${column}${task.row}?valueInputOption=RAW`,{method:'PUT',headers:{Authorization:`Bearer ${accessToken}`,'Content-Type':'application/json'},body:JSON.stringify({values:[[cellValue]]})});if(!res.ok)throw new Error('HTTP '+res.status);setStatus('Saved.');return 'saved';}catch(e){queueWrite(task.row,column,cellValue);setStatus('Offline or write failed — queued for later sync.');return 'queued';}}else{queueWrite(task.row,column,cellValue);setStatus('Offline — change queued, will sync when connected.');return 'queued';}}
   const toggleDone=(task,v)=>task.recurrence?setRecurringCompletion(task,v):writeColumn(task,'G','done',v);
   const toggleTodayShared=(task,v)=>writeColumn(task,'H','todayFlag',v?'TRUE':'FALSE');
   function todayStr(){return localDateStr();}
@@ -206,7 +214,45 @@
   function isOverdue(t){if(t.recurrence)return false;const norm=normalizeDue(t.due);return !t.done&&!!norm&&norm<todayStr();}
   function isToday(t){if(t.todayFlag==='FALSE')return false;if(t.todayFlag==='TRUE')return true;return CFG.dueDateImpliesToday ? normalizeDue(t.due)===todayStr() : false;}
 
-  function openTaskModal(task){detailTask=task;document.getElementById('task-modal-title').textContent=task.task;document.getElementById('task-modal-meta').textContent=[labelTag(task.tag),task.priority,task.due?`Due ${task.due}`:'',task.recurrence?`Recurring ${task.recurrence}`:''].filter(Boolean).join(' · ');document.getElementById('task-modal-notes').value=task.notes||'';document.getElementById('task-modal').style.display='flex';}
+  function taskMetaText(task){return [labelTag(task.tag),task.priority,task.due?`Due ${task.due}`:'',task.recurrence?`Recurring ${task.recurrence}`:''].filter(Boolean).join(' · ');}
+  function openTaskModal(task){
+    detailTask=task;
+    document.getElementById('task-modal-title').textContent=task.task;
+    document.getElementById('task-modal-meta').textContent=taskMetaText(task);
+    document.getElementById('task-modal-name').value=task.task;
+    document.getElementById('task-modal-priority').value=['High','Medium','Low'].includes(task.priority)?task.priority:'Medium';
+    document.getElementById('task-modal-notes').value=task.notes||'';
+    document.getElementById('task-modal').style.display='flex';
+  }
+  async function saveTaskDetails(){
+    const task=detailTask;
+    if(!task)return;
+    const nameInput=document.getElementById('task-modal-name');
+    const title=nameInput.value.trim();
+    const priority=document.getElementById('task-modal-priority').value;
+    if(!title){setStatus('Task title cannot be empty.');nameInput.focus();return;}
+    if(!['High','Medium','Low'].includes(priority)){setStatus('Choose a valid priority.');return;}
+    const changes=[];
+    if(title!==task.task)changes.push(['B','task',title]);
+    if(priority!==task.priority)changes.push(['E','priority',priority]);
+    if(!changes.length){setStatus('No task or priority changes to save.');return;}
+    const button=document.getElementById('task-details-save');
+    button.disabled=true;
+    button.textContent='Saving…';
+    try{
+      const outcomes=[];
+      for(const [col,field,value] of changes)outcomes.push(await writeColumn(task,col,field,value));
+      if(detailTask===task){
+        document.getElementById('task-modal-title').textContent=task.task;
+        document.getElementById('task-modal-meta').textContent=taskMetaText(task);
+        nameInput.value=task.task;
+      }
+      setStatus(outcomes.every(o=>o==='saved')?'Task and priority saved.':'Task changes queued for later sync.');
+    }finally{
+      button.disabled=false;
+      button.textContent='Save task + priority';
+    }
+  }
   function closeTaskModal(){document.getElementById('task-modal').style.display='none';detailTask=null;}
 
   function visibleTask(task) {
@@ -243,7 +289,7 @@
       btn.textContent=showCompleted?'Hide completed':'Show completed';
       render();
     });
-    document.getElementById('task-modal-close').addEventListener('click',closeTaskModal);document.getElementById('task-modal').addEventListener('click',e=>{if(e.target.id==='task-modal')closeTaskModal();});document.getElementById('task-notes-save').addEventListener('click',async()=>{const task=detailTask;if(!task)return;const text=document.getElementById('task-modal-notes').value;const ok=await saveTaskNotes(task,text);if(ok&&detailTask===task)document.getElementById('task-modal-notes').value=task.notes||'';});}
+    document.getElementById('task-modal-close').addEventListener('click',closeTaskModal);document.getElementById('task-modal').addEventListener('click',e=>{if(e.target.id==='task-modal')closeTaskModal();});document.getElementById('task-details-save').addEventListener('click',saveTaskDetails);document.getElementById('task-notes-save').addEventListener('click',async()=>{const task=detailTask;if(!task)return;const text=document.getElementById('task-modal-notes').value;const ok=await saveTaskNotes(task,text);if(ok&&detailTask===task)document.getElementById('task-modal-notes').value=task.notes||'';});}
 
   function boot(){injectShell();if(new Date().getDay()===0||new Date().getDay()===6){domainFirst='Personal';document.getElementById('sort-domain').textContent='Personal first';}tasks=loadCache();const c=loadTaxonomyCache();taxonomy=c.labels||{};taxonomyParent=c.parents||{};board=JSON.parse(localStorage.getItem(BOARD_CACHE_KEY)||'[]');render();bindEvents();if(typeof google==='undefined'||!google.accounts?.oauth2)setStatus('Google sign-in library did not load. Refresh when online.');else initAuth();}
 
