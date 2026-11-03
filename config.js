@@ -1,7 +1,7 @@
 window.TASK_APP_CONFIG = {
   owner: 'User',
   appName: 'Tasks',
-  appVersion: '2026.11.02.1',
+  appVersion: '2026.11.03.1',
   clientId: '255752713712-k3llal848drdndheiod5hff4tb4m3hn5.apps.googleusercontent.com',
   sheets: {
     tasks: '1KuLL5rWDSQK-sXHN0ZeXjHJj6RprFsL03lC-NyeK-dY',
